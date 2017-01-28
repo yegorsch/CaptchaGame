@@ -68,6 +68,7 @@ class ViewController: UIViewController {
         inputField.text = ""
     }
     
+
     
     func start(_ sender: UIButton) {
         // Here I want to change the button title from "start" to "pause"
