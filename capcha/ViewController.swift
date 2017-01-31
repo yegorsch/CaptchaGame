@@ -41,9 +41,6 @@ class ViewController: UIViewController {
         // Do not use autocorrection
         inputField.autocorrectionType = .no
         
-        box.layer.cornerRadius = box.frame.width/4
-        
-        
         startButton.addTarget(self, action: #selector(self.start), for: .touchUpInside)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -54,6 +51,13 @@ class ViewController: UIViewController {
     
     @IBAction func submit(_ sender: UIButton)
     {
+        // prevent submit when the game hasn't been started
+        if !didPressStartButton{
+            inputField.placeholder = "Press Start"
+            return
+        }else{
+            inputField.placeholder = "Type here"
+        }
         if inputField.text == capcha{
             // Varying the score based of how fast capcha was typed
             score = Int(CGFloat(levelConstants.prize) * (1 + progressBar.progress))
@@ -73,6 +77,7 @@ class ViewController: UIViewController {
     func start(_ sender: UIButton) {
         // Here I want to change the button title from "start" to "pause"
         if !didPressStartButton{
+            inputField.placeholder = "Type here"
             didPressStartButton = true
             startButton.setTitle("Pause", for: .normal)
             timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(counter), userInfo: nil, repeats: true)
@@ -138,11 +143,7 @@ class ViewController: UIViewController {
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         self.scrollView.contentInset = contentInset
     }
-    
-//    func dismissKeys(){
-//        self.scrollView.endEditing(true)
-//        print("lol")
-//    }
+
     
 
     
