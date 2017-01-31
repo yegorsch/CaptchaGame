@@ -61,10 +61,8 @@ class ViewController: UIViewController {
         if inputField.text == capcha{
             // Varying the score based of how fast capcha was typed
             score = Int(CGFloat(levelConstants.prize) * (1 + progressBar.progress))
-            print("equls")
         }else{
             score = score - levelConstants.punishment
-            print("not")
         }
         progressBar.progress = 1.0
         seconds = levelConstants.time
